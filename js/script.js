@@ -8,25 +8,26 @@ const burger = document.querySelector('.burger');
 let prov =0;
 
 const isMobile = () => window.matchMedia("(max-width: 600px)").matches || "ontouchstart" in window;
-if (!isMobile()) {
-  burgers.forEach(burger => {
-    const followCursor = ({ clientX, clientY }) => {
-    const { left, top, width, height } = burger.getBoundingClientRect();
-    gsap.to(burger, {x: clientX - left - width / 2,y: clientY - top - height / 2,duration: 0.45,ease: 'power2.out'});};
-    burger.addEventListener('mouseenter', () => {document.addEventListener('mousemove', followCursor);});
+window.addEventListener("load", () => {
+    if (!isMobile()) {
+    burgers.forEach(burger => {
+        const followCursor = ({ clientX, clientY }) => {
+        const { left, top, width, height } = burger.getBoundingClientRect();
+        gsap.to(burger, {x: clientX - left - width / 2,y: clientY - top - height / 2,duration: 0.45,ease: 'power2.out'});};
+        burger.addEventListener('mouseenter', () => {document.addEventListener('mousemove', followCursor);});
 
-    burger.addEventListener('mouseleave', () => {
-      document.removeEventListener('mousemove', followCursor);
-      gsap.to(burger, { x: 0, y: 0, duration: 0.6, ease: 'power2.out' });
+        burger.addEventListener('mouseleave', () => {
+        document.removeEventListener('mousemove', followCursor);
+        gsap.to(burger, { x: 0, y: 0, duration: 0.6, ease: 'power2.out' });
+        });
     });
-  });
-}
+    }
 
-gsap.to(burger,{opacity:1,duration:.2,delay:2.5})
-gsap.fromTo(burger,{scale:.5},{scale:1,duration:.75,delay:2.3,ease: CustomEase.create("custom", "M0,0 C.7,0 .3,1 1,1")})
-gsap.to(".header_button",{left:"0px",duration:1,delay:2.1,ease: CustomEase.create("custom", "M0,0 C.7,0 .3,1 1,1")})
-gsap.to(".hd_button2",{backgroundColor:"#00E200",duration:1,delay:3.5})
-
+    gsap.to(burger,{opacity:1,duration:.2,delay:.5})
+    gsap.fromTo(burger,{scale:.5},{scale:1,duration:.75,delay:.3,ease: CustomEase.create("custom", "M0,0 C.7,0 .3,1 1,1")})
+    gsap.to(".header_button",{left:"0px",duration:1,delay:.1,ease: CustomEase.create("custom", "M0,0 C.7,0 .3,1 1,1")})
+    gsap.to(".hd_button2",{backgroundColor:"#00E200",duration:1,delay:1.5})
+});
 const mediaQuery = window.matchMedia("(min-width: 840px)");
 
 function headerClick() {
@@ -90,21 +91,22 @@ const isAppleDevice = /iPhone|iPad|Macintosh/.test(navigator.userAgent);
 //     .to(".marquee-content",{top:"0px",duration:3,ease:CustomEase.create("custom","M0,0 C.7,0 .3,1 1,1")},1.7);  
 // }
 // else{
+window.addEventListener("load", () => {
     gsap.timeline()
-    .fromTo(".sec_photo1", { transform: "translate(0, 100vh)" }, { transform: "translate(0, 0)", duration: 1.2, delay: 1.5, ease: "power3.out" })
-    .to(".sec_photo6", { transform: "rotate(0deg)", duration: 0.5 }, 3.4)
-    .to(".main_photo", { opacity: 1, duration: 0.2 }, 1.2)
-    .fromTo(".sec_photo2", { transform: "translate(calc(var(--index)*-2), 0)" }, { transform: "translate(calc(var(--index)*0), 0)", duration: 0.4 }, 3.5)
-    .fromTo(".sec_photo2", { transform: "translate(calc(var(--index)*-3), 100vh)" }, { transform: "translate(calc(var(--index)*-2), 0)", duration: 1, ease: "power3.out" }, 1.8)
-    .fromTo(".sec_photo4", { transform: "translate(calc(var(--index)*-4), 100vh)" }, { transform: "translate(calc(var(--index)*-0), 0)", duration: 1, ease: "power3.out" }, 2.0)
-    .fromTo(".sec_photo3", { transform: "translate(calc(var(--index)*-3), 100vh)" }, { transform: "translate(calc(var(--index)*0), 0)", duration: 1, ease: "power3.out" }, 2.2)
-    .fromTo(".sec_photo7", { transform: "translate(calc(var(--index)*-1), 100vh)" }, { transform: "translate(calc(var(--index)*0), 0)", duration: 1, ease: "power3.out" }, 2.4)
-    .fromTo(".sec_photo5", { transform: "translate(calc(var(--index)*4), 0) rotate(15deg)" }, { transform: "translate(calc(var(--index)*0), 0) rotate(0deg)", duration: 1.2, ease: "power3.out" }, 3.0)
-    .fromTo(".sec_photo5", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 2.8)
-    .fromTo(".sec_photo6", { transform: "translate(calc(var(--index)*-1.5), 100vh) rotate(90deg)" }, { transform: "translate(calc(var(--index)*0), 0vh) rotate(90deg)", duration: 1.2, ease: "power3.out" }, 2.7)
-    .to(".sec_photo1", { transform: "scale(1)", duration: 0.6 }, 3.8)
-    .to(".marquee-content",{transform: "translateX(-50%) translateY(0px)",duration:3,ease:CustomEase.create("custom","M0,0 C.7,0 .3,1 1,1")},1.7);  
-
+    .fromTo(".sec_photo1", { transform: "translate(0, 100vh)" }, { transform: "translate(0, 0)", duration: 1.2,ease: "power3.out" })
+    .to(".sec_photo6", { transform: "rotate(0deg)", duration: 0.5 }, 1.9)
+    .to(".main_photo", { opacity: 1, duration: 0.2 }, .1)
+    .fromTo(".sec_photo2", { transform: "translate(calc(var(--index)*-2), 0)" }, { transform: "translate(calc(var(--index)*0), 0)", duration: 0.4 }, 2)
+    .fromTo(".sec_photo2", { transform: "translate(calc(var(--index)*-3), 100vh)" }, { transform: "translate(calc(var(--index)*-2), 0)", duration: 1, ease: "power3.out" }, .3)
+    .fromTo(".sec_photo4", { transform: "translate(calc(var(--index)*-4), 100vh)" }, { transform: "translate(calc(var(--index)*-0), 0)", duration: 1, ease: "power3.out" }, .5)
+    .fromTo(".sec_photo3", { transform: "translate(calc(var(--index)*-3), 100vh)" }, { transform: "translate(calc(var(--index)*0), 0)", duration: 1, ease: "power3.out" }, .7)
+    .fromTo(".sec_photo7", { transform: "translate(calc(var(--index)*-1), 100vh)" }, { transform: "translate(calc(var(--index)*0), 0)", duration: 1, ease: "power3.out" }, .9)
+    .fromTo(".sec_photo5", { transform: "translate(calc(var(--index)*4), 0) rotate(15deg)" }, { transform: "translate(calc(var(--index)*0), 0) rotate(0deg)", duration: 1.2, ease: "power3.out" }, 1.5)
+    .fromTo(".sec_photo5", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 1.3)
+    .fromTo(".sec_photo6", { transform: "translate(calc(var(--index)*-1.5), 100vh) rotate(90deg)" }, { transform: "translate(calc(var(--index)*0), 0vh) rotate(90deg)", duration: 1.2, ease: "power3.out" }, 1.2)
+    .to(".sec_photo1", { transform: "scale(1)", duration: 0.6 }, 2.3)
+});
+gsap.to(".marquee-content",{transform: "translateX(-50%) translateY(0px)",duration:3,delay:.2,ease:CustomEase.create("custom","M0,0 C.7,0 .3,1 1,1")});  
 // }
 
 

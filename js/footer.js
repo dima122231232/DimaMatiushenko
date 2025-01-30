@@ -37,7 +37,7 @@ button.addEventListener('mousemove', function(evt) {
   free_divs.forEach(free_div => {
     const followCursor = ({ clientX, clientY }) => {
       const { left, top, width, height } = free_div.getBoundingClientRect();
-      const scale = 0.5; // Коэффициент уменьшения движения
+      const scale = 0.5;
       gsap.to(free_div, {
         x: (clientX - left - width / 2) * scale,
         y: (clientY - top - height / 2) * scale,
