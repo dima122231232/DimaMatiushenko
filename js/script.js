@@ -224,13 +224,13 @@ else{
     gsap.fromTo(".char2",{opacity: 1},{opacity: 1,duration: 1,stagger: 0.001,duration:.01});
 
     
-    gsap.fromTo(".b_t1,.b_t1-fake",{transform: "translate(-50%, -50%) ",opacity:1},{transform: "translate(-50%, -50%) ",duration: .25,opacity:0,scrollTrigger: {trigger: ".section2", start:180*vh,end:181*vh,toggleActions: "play none none reverse"}});
-    gsap.fromTo(".b_t1,.b_t1-fake",{transform: "translate(-50%, -50%) ",opacity:0},{transform: "translate(-50%, -50%) ",duration: .25,opacity:1,scrollTrigger: {trigger: ".section2", start:100*vh,end:101*vh,toggleActions: "play none none reverse"}});
-    gsap.fromTo(".b_t2",{transform: "translate(-50%, -50%) ",opacity:1},{transform: "translate(-50%, -50%) ",duration: .25,opacity:0,scrollTrigger: {trigger: ".section2", start:280*vh,end:281*vh,toggleActions: "play none none reverse"}});
-    gsap.fromTo(".b_t2",{transform: "translate(-50%, -50%) ",opacity:0},{transform: "translate(-50%, -50%) ",duration: .25,opacity:1,scrollTrigger: {trigger: ".section2", start:201*vh,end:202*vh,toggleActions: "play none none reverse"}});
-    gsap.fromTo(".b_t3",{transform: "translate(-50%, -50%) ",opacity:1},{transform: "translate(-50%, -50%) ",duration: .25,opacity:0,scrollTrigger: {trigger: ".section2", start:379*vh,end:380*vh,toggleActions: "play none none reverse"}});
-    gsap.fromTo(".b_t3",{transform: "translate(-50%, -50%) ",opacity:0},{transform: "translate(-50%, -50%) ",duration: .25,opacity:1,scrollTrigger: {trigger: ".section2", start:301*vh,end:302*vh,toggleActions: "play none none reverse"}});
-    gsap.fromTo(".b_t4",{transform: "translate(-50%, -50%) ",opacity:1},{transform: "translate(-50%, -50%) ",duration: .25,opacity:0,scrollTrigger: {trigger: ".section2", start:499*vh,end:500*vh,toggleActions: "play none none reverse"}});
-    gsap.fromTo(".b_t4",{transform: "translate(-50%, -50%) ",opacity:0},{transform: "translate(-50%, -50%) ",duration: .25,opacity:1,scrollTrigger: {trigger: ".section2", start:401*vh,end:402*vh,toggleActions: "play none none reverse"}});
+    gsap.fromTo(".b_t1,.b_t1-fake",{transform: "translate(-50%, -50%) ",opacity:1},{transform: "translate(-50%, -50%) ",duration: .35,opacity:0,scrollTrigger: {trigger: ".section2", start:180*vh,end:181*vh,toggleActions: "play none none reverse"}});
+    gsap.fromTo(".b_t1,.b_t1-fake",{transform: "translate(-50%, -50%) ",opacity:0},{transform: "translate(-50%, -50%) ",duration: .35,opacity:1,scrollTrigger: {trigger: ".section2", start:100*vh,end:101*vh,toggleActions: "play none none reverse"}});
+    gsap.fromTo(".b_t2",{transform: "translate(-50%, -50%) ",opacity:1},{transform: "translate(-50%, -50%) ",duration: .35,opacity:0,scrollTrigger: {trigger: ".section2", start:280*vh,end:281*vh,toggleActions: "play none none reverse"}});
+    gsap.fromTo(".b_t2",{transform: "translate(-50%, -50%) ",opacity:0},{transform: "translate(-50%, -50%) ",duration: .35,opacity:1,scrollTrigger: {trigger: ".section2", start:201*vh,end:202*vh,toggleActions: "play none none reverse"}});
+    gsap.fromTo(".b_t3",{transform: "translate(-50%, -50%) ",opacity:1},{transform: "translate(-50%, -50%) ",duration: .35,opacity:0,scrollTrigger: {trigger: ".section2", start:379*vh,end:380*vh,toggleActions: "play none none reverse"}});
+    gsap.fromTo(".b_t3",{transform: "translate(-50%, -50%) ",opacity:0},{transform: "translate(-50%, -50%) ",duration: .35,opacity:1,scrollTrigger: {trigger: ".section2", start:301*vh,end:302*vh,toggleActions: "play none none reverse"}});
+    // gsap.fromTo(".b_t4",{transform: "translate(-50%, -50%) ",opacity:1},{transform: "translate(-50%, -50%) ",duration: .35,opacity:0,scrollTrigger: {trigger: ".section2", start:499*vh,end:500*vh,toggleActions: "play none none reverse"}});
+    gsap.fromTo(".b_t4",{transform: "translate(-50%, -50%) ",opacity:0},{transform: "translate(-50%, -50%) ",duration: .35,opacity:1,scrollTrigger: {trigger: ".section2", start:401*vh,end:402*vh,toggleActions: "play none none reverse"}});
     
 }
