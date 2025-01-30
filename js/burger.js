@@ -14,9 +14,9 @@ homeButton.addEventListener('click', () => {
     .to(".fr", { right: "-20vw", duration: 1, ease: "strong.inOut" }, 0)
     .to(".burger-str", { width: "6vw", duration: .8, delay: 0.1, ease: CustomEase.create("custom", "M0,0 C.7,0 .3,1 1,1") }, 0);
   prov = 0;
-  gsap.to(window, {duration: 2,delay:.5,scrollTo: ".section1",ease: CustomEase.create("custom", "M0,0 C.7,0 .3,1 1,1"),overwrite: "auto"});}
+    gsap.to(window, {duration: 2,delay:.5,scrollTo: ".section1",ease: CustomEase.create("custom", "M0,0 C.7,0 .3,1 1,1"),overwrite: "auto"});}
   else{
-    gsap.to(window, {duration: 2,scrollTo: ".section1",ease: CustomEase.create("custom", "M0,0 C.7,0 .3,1 1,1"),overwrite: "auto"});
+    ScrollSmoother.get().scrollTo(".section1", true);
   }
 });
 
@@ -32,9 +32,9 @@ contactButton.addEventListener('click', () => {
         .to(".fr", { right: "-20vw", duration: 1, ease: "strong.inOut" }, 0)
         .to(".burger-str", { width: "6vw", duration: .8, delay: 0.1, ease: CustomEase.create("custom", "M0,0 C.7,0 .3,1 1,1") }, 0);
         prov = 0;
-        gsap.to(window, {duration: 2,daly:.5, scrollTo: "footer",ease: CustomEase.create("custom", "M0,0 C.7,0 .3,1 1,1"),overwrite: "auto"});
+        gsap.to(window, {duration: 2,daly:.5, scrollTo: "footer",ease: CustomEase.create("custom", "M0,0 C.7,0 .3,1 1,1")});
     }
     else{
-        gsap.to(window, {duration: 2, scrollTo: "footer",ease: CustomEase.create("custom", "M0,0 C.7,0 .3,1 1,1"),overwrite: "auto"});
+        ScrollSmoother.get().scrollTo("footer", true);
     }
 });
