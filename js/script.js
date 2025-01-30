@@ -95,7 +95,7 @@ window.addEventListener("load", () => {
     gsap.timeline()
     .fromTo(".sec_photo1", { transform: "translate(0, 100vh)" }, { transform: "translate(0, 0)", duration: 1.2,ease: "power3.out" })
     .to(".sec_photo6", { transform: "rotate(0deg)", duration: 0.5 }, 1.9)
-    .to(".main_photo", { opacity: 1, duration: 0.2 }, .1)
+    .to(".main_photo", { opacity: 1, duration: 0.2 }, .2)
     .fromTo(".sec_photo2", { transform: "translate(calc(var(--index)*-2), 0)" }, { transform: "translate(calc(var(--index)*0), 0)", duration: 0.4 }, 2)
     .fromTo(".sec_photo2", { transform: "translate(calc(var(--index)*-3), 100vh)" }, { transform: "translate(calc(var(--index)*-2), 0)", duration: 1, ease: "power3.out" }, .3)
     .fromTo(".sec_photo4", { transform: "translate(calc(var(--index)*-4), 100vh)" }, { transform: "translate(calc(var(--index)*-0), 0)", duration: 1, ease: "power3.out" }, .5)
@@ -104,9 +104,9 @@ window.addEventListener("load", () => {
     .fromTo(".sec_photo5", { transform: "translate(calc(var(--index)*4), 0) rotate(15deg)" }, { transform: "translate(calc(var(--index)*0), 0) rotate(0deg)", duration: 1.2, ease: "power3.out" }, 1.5)
     .fromTo(".sec_photo5", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 1.3)
     .fromTo(".sec_photo6", { transform: "translate(calc(var(--index)*-1.5), 100vh) rotate(90deg)" }, { transform: "translate(calc(var(--index)*0), 0vh) rotate(90deg)", duration: 1.2, ease: "power3.out" }, 1.2)
-    .to(".sec_photo1", { transform: "scale(1)", duration: 0.6 }, 2.3)
+    .to(".sec_photo1", { transform: "scale(1)", duration: 0.6 }, 2.3);
+    gsap.to(".marquee-content",{transform: "translateX(-50%) translateY(0px)",duration:3,delay:.2,ease:CustomEase.create("custom","M0,0 C.7,0 .3,1 1,1")});  
 });
-gsap.to(".marquee-content",{transform: "translateX(-50%) translateY(0px)",duration:3,delay:.2,ease:CustomEase.create("custom","M0,0 C.7,0 .3,1 1,1")});  
 // }
 
 
@@ -136,38 +136,39 @@ const text = "CREATOR · DEVELOPER · DESIGNER · PROGRAMISTICC · ";
 const modifiedText = text.replace(/ · /g, '<span class="dot"> · </span>');
 const repeatCount = mediaQuery.matches ? 30 : 100;
 marqueeContent.innerHTML = modifiedText.repeat(repeatCount);
-function animateDesktop() {
-    gsap.to(".marquee-content", {
-        x:"100%",
+window.addEventListener("load", () => {
+    function animateDesktop() {
+        gsap.to(".marquee-content", {
+            x:"100%",
+            duration: 250,
+            ease: "none",
+            repeat: -1,
+        });
+    window.addEventListener("scroll", () => {
+        const scrollDirection = window.scrollY > (this.lastScroll || 0) ? 1 : -1;
+        this.lastScroll = window.scrollY;
+        gsap.to(".marquee-content", {
+        x: scrollDirection === 1 ? "-100%" : "100%",
         duration: 250,
         ease: "none",
         repeat: -1,
-      });
-  window.addEventListener("scroll", () => {
-    const scrollDirection = window.scrollY > (this.lastScroll || 0) ? 1 : -1;
-    this.lastScroll = window.scrollY;
-    gsap.to(".marquee-content", {
-      x: scrollDirection === 1 ? "-100%" : "100%",
-      duration: 250,
-      ease: "none",
-      repeat: -1,
+        });
     });
-  });
-}
-function animateMobile() {
-  gsap.to(".marquee-content", {
-    x: "100%",
-    duration: 500,
-    ease: "none",
-    repeat: -1,
-  });
-}
-if (!mediaQuery.matches) {
-  animateMobile();
-} else {
-  animateDesktop();
-}
-
+    }
+    function animateMobile() {
+    gsap.to(".marquee-content", {
+        x: "100%",
+        duration: 500,
+        ease: "none",
+        repeat: -1,
+    });
+    }
+    if (!mediaQuery.matches) {
+    animateMobile();
+    } else {
+    animateDesktop();
+    }
+});
 
         /*SECTION2*/
 gsap.to(".section2", {scrollTrigger: {trigger: ".section2",start: "top top",end:500*vh,pin: true,pinSpacing: true,scrub: 2,anticipatePin: 1}});
@@ -214,21 +215,22 @@ if (mediaQuery.matches) {
 }
 else{
     
-    gsap.fromTo(".char5",{opacity: .1},{opacity: 1,duration: 1,stagger: 0.03,scrollTrigger: {trigger: ".section2", start: "top top",end:200*vh, scrub: true,},});
-    gsap.fromTo(".b_t11",{transform: "translate(-50%, -50%) ",opacity:.85},{transform: "translate(-50%, -50%) ",opacity:0,scrollTrigger: {trigger: ".section2", start:200*vh,end:250*vh, scrub: true,},});
+    gsap.fromTo(".char5",{opacity: .1},{opacity: 1,duration: 1,stagger: 0.03,scrollTrigger: {trigger: ".section2", start: "top top",end:180*vh, scrub: true,},});
+    gsap.fromTo(".b_t11",{transform: "translate(-50%, -50%) ",opacity:.85},{transform: "translate(-50%, -50%) ",duration: .5,opacity:0,scrollTrigger: {trigger: ".section2", start:199*vh,end:200*vh,toggleActions: "play none none reverse"}});
 
     gsap.fromTo(".macro__polosa-set2",{width:"0px"},{width:"120px",scrollTrigger: {trigger: ".section2", start: "top top",end:500*vh, scrub: true,},});
 
     gsap.fromTo(".char",{opacity: .4},{opacity: 1,duration: 1,stagger: 0.03,scrollTrigger: {trigger: ".section2", start: "top top",end:200*vh, scrub: true,},});
     gsap.fromTo(".char2",{opacity: 1},{opacity: 1,duration: 1,stagger: 0.001,duration:.01});
-    gsap.fromTo(".b_t2",{opacity:0},{opacity:1,scrollTrigger: {trigger: ".section2", start:250*vh,end:270*vh, scrub: true,},});
-    gsap.fromTo(".am2",{opacity:0},{opacity:1,scrollTrigger: {trigger: ".section2", start:250*vh,end:270*vh, scrub: true,},});
-    gsap.fromTo(".b_t3",{opacity:0},{opacity:1,scrollTrigger: {trigger: ".section2", start:350*vh,end:370*vh, scrub: true,},});
-    gsap.fromTo(".am3",{opacity:0},{opacity:1,scrollTrigger: {trigger: ".section2", start:350*vh,end:370*vh, scrub: true,},});
-    gsap.fromTo(".b_t4",{opacity:0},{opacity:1,scrollTrigger: {trigger: ".section2", start:450*vh,end:470*vh, scrub: true,},});
-    gsap.fromTo(".am4",{opacity:0},{opacity:1,scrollTrigger: {trigger: ".section2", start:450*vh,end:470*vh, scrub: true,},});
+    // gsap.fromTo(".b_t4",{opacity:0},{opacity:1,scrollTrigger: {trigger: ".section2", start:400*vh,end:450*vh, scrub: true,},});
 
-    gsap.fromTo(".b_t1,.b_t1-fake",{transform: "translate(-50%, -50%) ",opacity:1},{transform: "translate(-50%, -50%) ",opacity:0,scrollTrigger: {trigger: ".section2", start:200*vh,end:250*vh, scrub: true,},});
-    gsap.fromTo(".b_t2",{transform: "translate(-50%, -50%) ",opacity:1},{transform: "translate(-50%, -50%) ",opacity:0,scrollTrigger: {trigger: ".section2", start:330*vh,end:350*vh, scrub: true,},});
-    gsap.fromTo(".b_t3",{transform: "translate(-50%, -50%) ",opacity:1},{transform: "translate(-50%, -50%) ",opacity:0,scrollTrigger: {trigger: ".section2", start:430*vh,end:450*vh, scrub: true,},});
+    gsap.fromTo(".b_t1,.b_t1-fake",{transform: "translate(-50%, -50%) ",opacity:1},{transform: "translate(-50%, -50%) ",duration: .5,opacity:0,scrollTrigger: {trigger: ".section2", start:200*vh,end:201*vh,toggleActions: "play none none reverse"}});
+    gsap.fromTo(".b_t1,.b_t1-fake",{transform: "translate(-50%, -50%) ",opacity:0},{transform: "translate(-50%, -50%) ",duration: .5,opacity:1,scrollTrigger: {trigger: ".section2", start:100*vh,end:101*vh,toggleActions: "play none none reverse"}});
+    gsap.fromTo(".b_t2",{transform: "translate(-50%, -50%) ",opacity:1},{transform: "translate(-50%, -50%) ",duration: .5,opacity:0,scrollTrigger: {trigger: ".section2", start:300*vh,end:301*vh,toggleActions: "play none none reverse"}});
+    gsap.fromTo(".b_t2",{transform: "translate(-50%, -50%) ",opacity:0},{transform: "translate(-50%, -50%) ",duration: .5,opacity:1,scrollTrigger: {trigger: ".section2", start:201*vh,end:202*vh,toggleActions: "play none none reverse"}});
+    gsap.fromTo(".b_t3",{transform: "translate(-50%, -50%) ",opacity:1},{transform: "translate(-50%, -50%) ",duration: .5,opacity:0,scrollTrigger: {trigger: ".section2", start:399*vh,end:400*vh,toggleActions: "play none none reverse"}});
+    gsap.fromTo(".b_t3",{transform: "translate(-50%, -50%) ",opacity:0},{transform: "translate(-50%, -50%) ",duration: .5,opacity:1,scrollTrigger: {trigger: ".section2", start:301*vh,end:302*vh,toggleActions: "play none none reverse"}});
+    gsap.fromTo(".b_t4",{transform: "translate(-50%, -50%) ",opacity:1},{transform: "translate(-50%, -50%) ",duration: .5,opacity:0,scrollTrigger: {trigger: ".section2", start:499*vh,end:500*vh,toggleActions: "play none none reverse"}});
+    gsap.fromTo(".b_t4",{transform: "translate(-50%, -50%) ",opacity:0},{transform: "translate(-50%, -50%) ",duration: .5,opacity:1,scrollTrigger: {trigger: ".section2", start:401*vh,end:402*vh,toggleActions: "play none none reverse"}});
+    
 }

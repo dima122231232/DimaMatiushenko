@@ -84,6 +84,9 @@
     .bottom-burger{
         bottom:30vh;
     }
+    .am2,.am3,.am4{
+        opacity: 1;
+    }
 }
 @media (max-width: 550px){
     .anim-h4, .anim-h4-fake{font-size:calc(var(--index)*1);}
