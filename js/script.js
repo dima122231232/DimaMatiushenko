@@ -124,7 +124,7 @@ window.addEventListener("load", () => {
 //     .to(".marquee-content",{top:"0px",duration:3,ease:CustomEase.create("custom","M0,0 C.7,0 .3,1 1,1")},1.7);
 
 if (mediaQuery.matches) {gsap.fromTo(".rounded-div-wrap",{height:"10vh"},{height:"0vh",scrollTrigger: {trigger: ".section1", start:50*vh,end:130*vh, scrub: true,}});}
-else{gsap.fromTo(".rounded-div-wrap",{height:"5vh"},{height:"0vh",scrollTrigger: {trigger: ".section1", start:50*vh,end:110*vh, scrub: true}});}
+else{gsap.fromTo(".rounded-div-wrap",{height:"5vh"},{height:"0vh",scrollTrigger: {trigger: ".section1", start:30*vh,end:110*vh, scrub: true}});}
 
 
 const marqueeContent = document.querySelector('.marquee-content');
