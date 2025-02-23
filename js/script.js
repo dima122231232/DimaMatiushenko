@@ -200,7 +200,7 @@ if (mediaQuery.matches) {
 
     gsap.fromTo(".macro__polosa-set2",{width:"0px"},{width:"162px",scrollTrigger: {trigger: ".section2", start: "top top",end:500*vh, scrub: true,},});
 
-    gsap.fromTo(".char",{opacity: .4},{opacity: 1,duration: 1,stagger: 0.03,scrollTrigger: {trigger: ".section2", start: "top top",end:200*vh, scrub: true,},});
+    gsap.fromTo(".char",{opacity: .4},{opacity: 1,duration: 1,stagger: 0.03,scrollTrigger: {trigger: ".section2", start: "top top",end:190*vh, scrub: true,},});
     gsap.fromTo(".char2",{opacity: 1},{opacity: 1,duration: 1,stagger: 0.001,duration:.01});
     gsap.fromTo(".b_t2",{opacity:0},{opacity:1,scrollTrigger: {trigger: ".section2", start:250*vh,end:300*vh, scrub: true,},});
     gsap.fromTo(".am2",{opacity:0},{opacity:1,scrollTrigger: {trigger: ".section2", start:250*vh,end:300*vh, scrub: true,},});
