@@ -123,12 +123,8 @@ window.addEventListener("load", () => {
 //     .to(".sec_photo1",{scale:1,duration:.5},3.7)
 //     .to(".marquee-content",{top:"0px",duration:3,ease:CustomEase.create("custom","M0,0 C.7,0 .3,1 1,1")},1.7);
 
-if (mediaQuery.matches) {
-    gsap.fromTo(".rounded-div-wrap",{height:"10vh"},{height:"0vh",scrollTrigger: {trigger: ".section1", start:50*vh,end:130*vh, scrub: true,}});
-}
-else{
-    gsap.fromTo(".rounded-div-wrap",{height:"5vh"},{height:"0vh",scrollTrigger: {trigger: ".section1", start:50*vh,end:110*vh, scrub: true}});
-}
+if (mediaQuery.matches) {gsap.fromTo(".rounded-div-wrap",{height:"10vh"},{height:"0vh",scrollTrigger: {trigger: ".section1", start:50*vh,end:130*vh, scrub: true,}});}
+else{gsap.fromTo(".rounded-div-wrap",{height:"5vh"},{height:"0vh",scrollTrigger: {trigger: ".section1", start:50*vh,end:110*vh, scrub: true}});}
 
 
 const marqueeContent = document.querySelector('.marquee-content');
@@ -137,100 +133,74 @@ const modifiedText = text.replace(/ · /g, '<span class="dot"> · </span>');
 const repeatCount = mediaQuery.matches ? 30 : 100;
 marqueeContent.innerHTML = modifiedText.repeat(repeatCount);
 window.addEventListener("load", () => {
-    function animateDesktop() {
-        gsap.to(".marquee-content", {
-            x:"100%",
-            duration: 250,
-            ease: "none",
-            repeat: -1,
-        });
-    window.addEventListener("scroll", () => {
-        const scrollDirection = window.scrollY > (this.lastScroll || 0) ? 1 : -1;
-        this.lastScroll = window.scrollY;
-        gsap.to(".marquee-content", {
-        x: scrollDirection === 1 ? "-100%" : "100%",
-        duration: 250,
-        ease: "none",
-        repeat: -1,
-        });
-    });
-    }
-    function animateMobile() {
-    gsap.to(".marquee-content", {
-        x: "100%",
-        duration: 500,
-        ease: "none",
-        repeat: -1,
-    });
-    }
-    if (!mediaQuery.matches) {
-    animateMobile();
-    } else {
-    animateDesktop();
-    }
+    function animateDesktop() {gsap.to(".marquee-content", {x:"100%",duration: 250,ease: "none",repeat: -1,});window.addEventListener("scroll", () => {const scrollDirection = window.scrollY > (this.lastScroll || 0) ? 1 : -1;this.lastScroll = window.scrollY;gsap.to(".marquee-content", {x: scrollDirection === 1 ? "-100%" : "100%",duration: 250,ease: "none",repeat: -1,});});}
+    function animateMobile() {gsap.to(".marquee-content", {x: "100%",duration: 500,ease: "none",repeat: -1,});}
+    if (!mediaQuery.matches) {animateMobile();} else {animateDesktop();}
 });
 
         /*SECTION2*/
-gsap.to(".section2", {scrollTrigger: {trigger: ".section2",start: "top top",end:500*vh,pin: true,pinSpacing: true,scrub: 2,anticipatePin: 1}});
 
-// if (mediaQuery.matches) {
-    function splitTextToChars(selector, className) {
-        document.querySelectorAll(selector).forEach(el => {
-            el.innerHTML = el.textContent.trim().split("").map(char => 
-                `<span class="${className}">${char === " " ? "&nbsp;" : char}</span>`
-            ).join("");
-        });
-    }
-// }
-// else{
-//     function splitTextToChars(selector, className) {
-//         document.querySelectorAll(selector).forEach(el => {
-//             el.innerHTML = el.textContent.trim().split(" ").map(word => 
-//                 `<span class="${className}">${word}</span>`
-//             ).join(" ");
-//         });
-//     }
-// }
+    gsap.to(".section2", {scrollTrigger: {trigger: ".section2",start: "top top",end:500*vh,pin: true,pinSpacing: true,scrub: 2,anticipatePin: 1}});
 
-splitTextToChars(".anim1", "char");
-splitTextToChars(".anim1-fake", "char2");
-splitTextToChars(".anim11", "char5");
+    // if (mediaQuery.matches) {
+        function splitTextToChars(selector, className) {
+            document.querySelectorAll(selector).forEach(el => {
+                el.innerHTML = el.textContent.trim().split("").map(char => 
+                    `<span class="${className}">${char === " " ? "&nbsp;" : char}</span>`
+                ).join("");
+            });
+        }
+    // }
+    // else{
+    //     function splitTextToChars(selector, className) {
+    //         document.querySelectorAll(selector).forEach(el => {
+    //             el.innerHTML = el.textContent.trim().split(" ").map(word => 
+    //                 `<span class="${className}">${word}</span>`
+    //             ).join(" ");
+    //         });
+    //     }
+    // }
 
-if (mediaQuery.matches) {
+    splitTextToChars(".anim1", "char");
+    splitTextToChars(".anim1-fake", "char2");
+    splitTextToChars(".anim11", "char5");
 
-    gsap.fromTo(".macro__polosa-set2",{width:"0px"},{width:"162px",scrollTrigger: {trigger: ".section2", start: "top top",end:500*vh, scrub: true,},});
+    // if (mediaQuery.matches) {
 
-    gsap.fromTo(".char",{opacity: .4},{opacity: 1,duration: 1,stagger: 0.03,scrollTrigger: {trigger: ".section2", start: "top top",end:190*vh, scrub: true,},});
-    gsap.fromTo(".char2",{opacity: 1},{opacity: 1,duration: 1,stagger: 0.001,duration:.01});
-    gsap.fromTo(".b_t2",{opacity:0},{opacity:1,scrollTrigger: {trigger: ".section2", start:250*vh,end:300*vh, scrub: true,},});
-    gsap.fromTo(".am2",{opacity:0},{opacity:1,scrollTrigger: {trigger: ".section2", start:250*vh,end:300*vh, scrub: true,},});
-    gsap.fromTo(".b_t3",{opacity:0},{opacity:1,scrollTrigger: {trigger: ".section2", start:350*vh,end:400*vh, scrub: true,},});
-    gsap.fromTo(".am3",{opacity:0},{opacity:1,scrollTrigger: {trigger: ".section2", start:350*vh,end:400*vh, scrub: true,},});
-    gsap.fromTo(".b_t4",{opacity:0},{opacity:1,scrollTrigger: {trigger: ".section2", start:450*vh,end:500*vh, scrub: true,},});
-    gsap.fromTo(".am4",{opacity:0},{opacity:1,scrollTrigger: {trigger: ".section2", start:450*vh,end:500*vh, scrub: true,},});
+        gsap.fromTo(".macro__polosa-set2",{width:"0px"},{width:"162px",scrollTrigger: {trigger: ".section2", start: "top top",end:500*vh, scrub: true,},});
 
-    gsap.fromTo(".b_t1,.b_t1-fake",{transform: "translate(-50%, -50%) scale(1)",opacity:1,filter: "blur(0px)"},{transform: "translate(-50%, -50%)  scale(1.5)",opacity:0,filter: "blur(7px)",scrollTrigger: {trigger: ".section2", start:200*vh,end:250*vh, scrub: true,},});
-    gsap.fromTo(".b_t2",{transform: "translate(-50%, -50%) scale(1)",opacity:1,filter: "blur(0px)"},{transform: "translate(-50%, -50%)  scale(1.5)",opacity:0,filter: "blur(7px)",scrollTrigger: {trigger: ".section2", start:300*vh,end:350*vh, scrub: true,},});
-    gsap.fromTo(".b_t3",{transform: "translate(-50%, -50%) scale(1)",opacity:1,filter: "blur(0px)"},{transform: "translate(-50%, -50%)  scale(1.5)",opacity:0,filter: "blur(7px)",scrollTrigger: {trigger: ".section2", start:400*vh,end:450*vh, scrub: true,},});
-}
-else{
-    
-    gsap.fromTo(".char5",{opacity: .1},{opacity: 1,duration: 1,stagger: 0.03,scrollTrigger: {trigger: ".section2", start: "top top",end:160*vh, scrub: true,},});
-    gsap.fromTo(".b_t11",{transform: "translate(-50%, -50%) ",opacity:.85},{transform: "translate(-50%, -50%) ",duration: .5,opacity:0,scrollTrigger: {trigger: ".section2", start:189*vh,end:180*vh,toggleActions: "play none none reverse"}});
+        gsap.fromTo(".char",{opacity: .4},{opacity: 1,duration: 1,stagger: 0.03,scrollTrigger: {trigger: ".section2", start: "top top",end:190*vh, scrub: true,},});
+        gsap.fromTo(".char2",{opacity: 1},{opacity: 1,duration: 1,stagger: 0.001,duration:.01});
+        gsap.fromTo(".b_t2",{opacity:0},{opacity:1,scrollTrigger: {trigger: ".section2", start:250*vh,end:300*vh, scrub: true,},});
+        gsap.fromTo(".am2",{opacity:0},{opacity:1,scrollTrigger: {trigger: ".section2", start:250*vh,end:300*vh, scrub: true,},});
+        gsap.fromTo(".b_t3",{opacity:0},{opacity:1,scrollTrigger: {trigger: ".section2", start:350*vh,end:400*vh, scrub: true,},});
+        gsap.fromTo(".am3",{opacity:0},{opacity:1,scrollTrigger: {trigger: ".section2", start:350*vh,end:400*vh, scrub: true,},});
+        gsap.fromTo(".b_t4",{opacity:0},{opacity:1,scrollTrigger: {trigger: ".section2", start:450*vh,end:500*vh, scrub: true,},});
+        gsap.fromTo(".am4",{opacity:0},{opacity:1,scrollTrigger: {trigger: ".section2", start:450*vh,end:500*vh, scrub: true,},});
 
-    gsap.fromTo(".macro__polosa-set2",{width:"0px"},{width:"120px",scrollTrigger: {trigger: ".section2", start: "top top",end:500*vh, scrub: true,},});
+        gsap.fromTo(".b_t1,.b_t1-fake",{transform: "translate(-50%, -50%) scale(1)",opacity:1,filter: "blur(0px)"},{transform: "translate(-50%, -50%)  scale(1.5)",opacity:0,filter: "blur(7px)",scrollTrigger: {trigger: ".section2", start:200*vh,end:250*vh, scrub: true,},});
+        gsap.fromTo(".b_t2",{transform: "translate(-50%, -50%) scale(1)",opacity:1,filter: "blur(0px)"},{transform: "translate(-50%, -50%)  scale(1.5)",opacity:0,filter: "blur(7px)",scrollTrigger: {trigger: ".section2", start:300*vh,end:350*vh, scrub: true,},});
+        gsap.fromTo(".b_t3",{transform: "translate(-50%, -50%) scale(1)",opacity:1,filter: "blur(0px)"},{transform: "translate(-50%, -50%)  scale(1.5)",opacity:0,filter: "blur(7px)",scrollTrigger: {trigger: ".section2", start:400*vh,end:450*vh, scrub: true,},});
+    // }
+    // else{
+        
+    //     gsap.fromTo(".char5",{opacity: .1},{opacity: 1,duration: 1,stagger: 0.03,scrollTrigger: {trigger: ".section2", start: "top top",end:160*vh, scrub: true,},});
+    //     gsap.fromTo(".b_t11",{transform: "translate(-50%, -50%) ",opacity:.85},{transform: "translate(-50%, -50%) ",duration: .5,opacity:0,scrollTrigger: {trigger: ".section2", start:189*vh,end:180*vh,toggleActions: "play none none reverse"}});
 
-    gsap.fromTo(".char",{opacity: .4},{opacity: 1,duration: 1,stagger: 0.03,scrollTrigger: {trigger: ".section2", start: "top top",end:200*vh, scrub: true,},});
-    gsap.fromTo(".char2",{opacity: 1},{opacity: 1,duration: 1,stagger: 0.001,duration:.01});
+    //     gsap.fromTo(".macro__polosa-set2",{width:"0px"},{width:"120px",scrollTrigger: {trigger: ".section2", start: "top top",end:500*vh, scrub: true,},});
 
-    
-    gsap.fromTo(".b_t1,.b_t1-fake",{transform: "translate(-50%, -50%) ",opacity:1},{transform: "translate(-50%, -50%) ",duration: .35,opacity:0,scrollTrigger: {trigger: ".section2", start:180*vh,end:181*vh,toggleActions: "play none none reverse"}});
-    gsap.fromTo(".b_t1,.b_t1-fake",{transform: "translate(-50%, -50%) ",opacity:0},{transform: "translate(-50%, -50%) ",duration: .35,opacity:1,scrollTrigger: {trigger: ".section2", start:100*vh,end:101*vh,toggleActions: "play none none reverse"}});
-    gsap.fromTo(".b_t2",{transform: "translate(-50%, -50%) ",opacity:1},{transform: "translate(-50%, -50%) ",duration: .35,opacity:0,scrollTrigger: {trigger: ".section2", start:280*vh,end:281*vh,toggleActions: "play none none reverse"}});
-    gsap.fromTo(".b_t2",{transform: "translate(-50%, -50%) ",opacity:0},{transform: "translate(-50%, -50%) ",duration: .35,opacity:1,scrollTrigger: {trigger: ".section2", start:201*vh,end:202*vh,toggleActions: "play none none reverse"}});
-    gsap.fromTo(".b_t3",{transform: "translate(-50%, -50%) ",opacity:1},{transform: "translate(-50%, -50%) ",duration: .35,opacity:0,scrollTrigger: {trigger: ".section2", start:379*vh,end:380*vh,toggleActions: "play none none reverse"}});
-    gsap.fromTo(".b_t3",{transform: "translate(-50%, -50%) ",opacity:0},{transform: "translate(-50%, -50%) ",duration: .35,opacity:1,scrollTrigger: {trigger: ".section2", start:301*vh,end:302*vh,toggleActions: "play none none reverse"}});
-    // gsap.fromTo(".b_t4",{transform: "translate(-50%, -50%) ",opacity:1},{transform: "translate(-50%, -50%) ",duration: .35,opacity:0,scrollTrigger: {trigger: ".section2", start:499*vh,end:500*vh,toggleActions: "play none none reverse"}});
-    gsap.fromTo(".b_t4",{transform: "translate(-50%, -50%) ",opacity:0},{transform: "translate(-50%, -50%) ",duration: .35,opacity:1,scrollTrigger: {trigger: ".section2", start:401*vh,end:402*vh,toggleActions: "play none none reverse"}});
-    
-}
+    //     gsap.fromTo(".char",{opacity: .4},{opacity: 1,duration: 1,stagger: 0.03,scrollTrigger: {trigger: ".section2", start: "top top",end:200*vh, scrub: true,},});
+    //     gsap.fromTo(".char2",{opacity: 1},{opacity: 1,duration: 1,stagger: 0.001,duration:.01});
+
+        
+    //     gsap.fromTo(".b_t1,.b_t1-fake",{transform: "translate(-50%, -50%) ",opacity:1},{transform: "translate(-50%, -50%) ",duration: .35,opacity:0,scrollTrigger: {trigger: ".section2", start:180*vh,end:181*vh,toggleActions: "play none none reverse"}});
+    //     gsap.fromTo(".b_t1,.b_t1-fake",{transform: "translate(-50%, -50%) ",opacity:0},{transform: "translate(-50%, -50%) ",duration: .35,opacity:1,scrollTrigger: {trigger: ".section2", start:100*vh,end:101*vh,toggleActions: "play none none reverse"}});
+    //     gsap.fromTo(".b_t2",{transform: "translate(-50%, -50%) ",opacity:1},{transform: "translate(-50%, -50%) ",duration: .35,opacity:0,scrollTrigger: {trigger: ".section2", start:280*vh,end:281*vh,toggleActions: "play none none reverse"}});
+    //     gsap.fromTo(".b_t2",{transform: "translate(-50%, -50%) ",opacity:0},{transform: "translate(-50%, -50%) ",duration: .35,opacity:1,scrollTrigger: {trigger: ".section2", start:201*vh,end:202*vh,toggleActions: "play none none reverse"}});
+    //     gsap.fromTo(".b_t3",{transform: "translate(-50%, -50%) ",opacity:1},{transform: "translate(-50%, -50%) ",duration: .35,opacity:0,scrollTrigger: {trigger: ".section2", start:379*vh,end:380*vh,toggleActions: "play none none reverse"}});
+    //     gsap.fromTo(".b_t3",{transform: "translate(-50%, -50%) ",opacity:0},{transform: "translate(-50%, -50%) ",duration: .35,opacity:1,scrollTrigger: {trigger: ".section2", start:301*vh,end:302*vh,toggleActions: "play none none reverse"}});
+    //     // gsap.fromTo(".b_t4",{transform: "translate(-50%, -50%) ",opacity:1},{transform: "translate(-50%, -50%) ",duration: .35,opacity:0,scrollTrigger: {trigger: ".section2", start:499*vh,end:500*vh,toggleActions: "play none none reverse"}});
+    //     gsap.fromTo(".b_t4",{transform: "translate(-50%, -50%) ",opacity:0},{transform: "translate(-50%, -50%) ",duration: .35,opacity:1,scrollTrigger: {trigger: ".section2", start:401*vh,end:402*vh,toggleActions: "play none none reverse"}});
+        
+    // }
+
