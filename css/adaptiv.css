@@ -7,7 +7,11 @@
         flex-direction: column;
         align-items: center;
         justify-content: space-between;
-        margin: 10px auto;
+        position: absolute;
+        left: 50%;
+        top:45%;
+        transform: translate(-50%,-50%);
+        margin: 0;
     }
     .full__img-sek1{top: 40%;}
     .burger {
@@ -22,7 +26,9 @@
     .header_button {
         display: none;
     }
-
+    .section2{display: none;}
+    .section3{background-color: black;color: #fff;height: 100vh;}
+    #play-pause{background-color: #fff;}
     .b_t1,.b_t1-fake{display: none;}
     .b_t11{display: block;}
     
@@ -30,8 +36,21 @@
     .block__comments{width:90%;}
     .Comments-h2{font-size: calc(var(--index)* 2.73);}
     .name__comments{font-size: calc(var(--index)* 1.8);text-align: center;}
-    .history__comments{font-size: calc(var(--index)* 1.5); width: calc(var(--index)*23.5);margin: 0 auto;}
-    .audio-player{margin-top:50px;}
+    .history__comments{
+        font-size: calc(var(--index)* 1.5);
+        width: 100vw;
+        text-align: center;
+        transform: translateX(-50%);
+        left: 50%;
+        position: relative;
+    }
+    .audio-player{
+    margin-top:0px;
+    bottom: 5vh;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    }
     #play-pause img{
         margin: calc(var(--index)* 1);
         height: calc(var(--index)* 1.7);
@@ -39,7 +58,7 @@
     .block__audio-panel {
         height: calc(var(--index)* 5);
         padding: 0 15px;
-        background-color: rgba(0, 0, 0, .03);
+        background-color: #fff;
         border-radius: calc(var(--index)* 5);
         border: calc(var(--index)* .33) solid rgba(0, 0, 0, .02);
     }
