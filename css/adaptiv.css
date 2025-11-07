@@ -26,7 +26,7 @@
     .header_button {
         display: none;
     }
-    .section2{display: none;}
+    /* .section2{display: none;} */
     .section3{background-color: black;color: #fff;height: 100vh;}
     #play-pause{background-color: #fff;}
     .b_t1,.b_t1-fake{display: none;}
