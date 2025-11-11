@@ -92,21 +92,87 @@ const isAppleDevice = /iPhone|iPad|Macintosh/.test(navigator.userAgent);
 // }
 // else{
 window.addEventListener("load", () => {
-    gsap.timeline()
-    .fromTo(".sec_photo1", { transform: "translate(0, 100vh)" }, { transform: "translate(0, 0)", duration: 1.2,ease: "power3.out" })
-    .to(".sec_photo6", { transform: "rotate(0deg)", duration: 0.5 }, 1.9)
-    .to(".main_photo", { opacity: 1, duration: 0.2 }, .2)
-    .fromTo(".sec_photo2", { transform: "translate(calc(var(--index)*-2), 0)" }, { transform: "translate(calc(var(--index)*0), 0)", duration: 0.4 }, 2)
-    .fromTo(".sec_photo2", { transform: "translate(calc(var(--index)*-3), 100vh)" }, { transform: "translate(calc(var(--index)*-2), 0)", duration: 1, ease: "power3.out" }, .3)
-    .fromTo(".sec_photo4", { transform: "translate(calc(var(--index)*-4), 100vh)" }, { transform: "translate(calc(var(--index)*-0), 0)", duration: 1, ease: "power3.out" }, .5)
-    .fromTo(".sec_photo3", { transform: "translate(calc(var(--index)*-3), 100vh)" }, { transform: "translate(calc(var(--index)*0), 0)", duration: 1, ease: "power3.out" }, .7)
-    .fromTo(".sec_photo7", { transform: "translate(calc(var(--index)*-1), 100vh)" }, { transform: "translate(calc(var(--index)*0), 0)", duration: 1, ease: "power3.out" }, .9)
-    .fromTo(".sec_photo5", { transform: "translate(calc(var(--index)*4), 0) rotate(15deg)" }, { transform: "translate(calc(var(--index)*0), 0) rotate(0deg)", duration: 1.2, ease: "power3.out" }, 1.5)
-    .fromTo(".sec_photo5", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 1.3)
-    .fromTo(".sec_photo6", { transform: "translate(calc(var(--index)*-1.5), 100vh) rotate(90deg)" }, { transform: "translate(calc(var(--index)*0), 0vh) rotate(90deg)", duration: 1.2, ease: "power3.out" }, 1.2)
-    .to(".sec_photo1", { transform: "scale(1)", duration: 0.6 }, 2.3);
-    gsap.to(".marquee-content",{transform: "translateX(-50%) translateY(0px)",duration:3,delay:.2,ease:CustomEase.create("custom","M0,0 C.7,0 .3,1 1,1")});  
+    const tl = gsap.timeline({
+        onComplete: () => gsap.delayedCall(0.3, activate3DEffect)
+    });
+
+    tl.fromTo(".sec_photo1", { transform: "translate(0, 150vh)" }, { transform: "translate(0, 0)", duration: .85, ease: "power1.inOut" })
+        .to(".sec_photo6", { transform: "rotate(0deg)", duration: 0.5 }, 1.9)
+        .to(".main_photo", { opacity: 1, duration: 0.2 }, .2)
+        .fromTo(".sec_photo2", { transform: "translate(calc(var(--index)*-2), 0)" }, { transform: "translate(calc(var(--index)*0), 0)", duration: 0.4 }, 2)
+        .fromTo(".sec_photo2", { transform: "translate(calc(var(--index)*-3), 100vh)" }, { transform: "translate(calc(var(--index)*-2), 0)", duration: 1, ease: "power3.out" }, .3)
+        .fromTo(".sec_photo4", { transform: "translate(calc(var(--index)*-4), 100vh)" }, { transform: "translate(calc(var(--index)*-0), 0)", duration: 1, ease: "power3.out" }, .5)
+        .fromTo(".sec_photo3", { transform: "translate(calc(var(--index)*-3), 100vh)" }, { transform: "translate(calc(var(--index)*0), 0)", duration: 1, ease: "power3.out" }, .7)
+        .fromTo(".sec_photo7", { transform: "translate(calc(var(--index)*-1), 100vh)" }, { transform: "translate(calc(var(--index)*0), 0)", duration: 1, ease: "power3.out" }, .9)
+        .fromTo(".sec_photo5", { transform: "translate(calc(var(--index)*4), 0) rotate(15deg)" }, { transform: "translate(calc(var(--index)*0), 0) rotate(0deg)", duration: 1.2, ease: "power3.out" }, 1.5)
+        .fromTo(".sec_photo5", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 1.3)
+        .fromTo(".sec_photo6", { transform: "translate(calc(var(--index)*-1.5), 100vh) rotate(90deg)" }, { transform: "translate(calc(var(--index)*0), 0vh) rotate(90deg)", duration: 1.2, ease: "power3.out" }, 1.2)
+        .to(".sec_photo1", { transform: "scale(1)", duration: 0.6 }, 2.3);
+
+    gsap.to(".marquee-content", {
+        transform: "translateX(-50%) translateY(0px)",
+        duration: 3,
+        delay: .2,
+        ease: CustomEase.create("custom", "M0,0 C.7,0 .3,1 1,1")
+    });
+    function activate3DEffect() {
+        const photos = gsap.utils.toArray(".sec_photo1, .sec_photo2, .sec_photo3, .sec_photo4, .sec_photo5, .sec_photo6, .sec_photo7");
+        const container = document.body;
+
+        let mouseX = 0, mouseY = 0;
+        let targetX = 0, targetY = 0;
+        let distanceFactor = 0;
+
+        const setters = photos.map(photo => ({
+            x: gsap.quickSetter(photo, "x", "px"),
+            y: gsap.quickSetter(photo, "y", "px"),
+            rotX: gsap.quickSetter(photo, "rotationX", "deg"),
+            rotY: gsap.quickSetter(photo, "rotationY", "deg"),
+        }));
+        gsap.ticker.add(() => {
+            mouseX += (targetX - mouseX) * 0.08;
+            mouseY += (targetY - mouseY) * 0.08;
+
+            const distance = Math.sqrt(mouseX * mouseX + mouseY * mouseY);
+            distanceFactor += ((1 - distance) - distanceFactor) * 0.1;
+
+            photos.forEach((photo, i) => {
+                const depth = (i + 1) * 0.15;
+                const move = distanceFactor * 30;
+
+                setters[i].x(mouseX * depth * -13 + mouseX * move);
+                setters[i].y(mouseY * depth * -13 + mouseY * move);
+                setters[i].rotY(mouseX * -13);
+                setters[i].rotX(-mouseY * -13);
+            });
+        });
+        container.addEventListener("mousemove", (e) => {
+            targetX = (e.clientX / window.innerWidth - 0.5) * 2;
+            targetY = (e.clientY / window.innerHeight - 0.5) * 2;
+        });
+        const smoothReset = () => {
+            gsap.to({ t: 1 }, {
+                t: 0,
+                duration: .6,
+                ease: "power3.out",
+                onUpdate: function () {
+                    targetX *= this.targets()[0].t;
+                    targetY *= this.targets()[0].t;
+                }
+            });
+        };
+
+        container.addEventListener("mouseleave", smoothReset);
+        window.addEventListener("blur", smoothReset);
+        document.addEventListener("visibilitychange", () => {
+            if (document.hidden) smoothReset();
+        });
+    }
 });
+
+
+
+
 // }
 
 
@@ -128,13 +194,13 @@ else{gsap.fromTo(".rounded-div-wrap",{height:"5vh"},{height:"0vh",scrollTrigger:
 
 
 const marqueeContent = document.querySelector('.marquee-content');
-const text = "CREATOR · DEVELOPER · DESIGNER · PROGRAMISTICC · ";
+const text = "CREATOR · DEVELOPER · DESIGNER · PROGRAMMER · ";
 const modifiedText = text.replace(/ · /g, '<span class="dot"> · </span>');
-const repeatCount = mediaQuery.matches ? 30 : 100;
+const repeatCount = mediaQuery.matches ? 20 : 25;
 marqueeContent.innerHTML = modifiedText.repeat(repeatCount);
 window.addEventListener("load", () => {
     function animateDesktop() {gsap.to(".marquee-content", {x:"100%",duration: 250,ease: "none",repeat: -1,});window.addEventListener("scroll", () => {const scrollDirection = window.scrollY > (this.lastScroll || 0) ? 1 : -1;this.lastScroll = window.scrollY;gsap.to(".marquee-content", {x: scrollDirection === 1 ? "-100%" : "100%",duration: 250,ease: "none",repeat: -1,});});}
-    function animateMobile() {gsap.to(".marquee-content", {x: "100%",duration: 500,ease: "none",repeat: -1,});}
+    function animateMobile() {gsap.to(".marquee-content", {x: "-100%",duration: 500,ease: "none",repeat: -1,});}
     if (!mediaQuery.matches) {animateMobile();} else {animateDesktop();}
 });
 
@@ -165,7 +231,7 @@ window.addEventListener("load", () => {
     splitTextToChars(".anim1-fake", "char2");
     splitTextToChars(".anim11", "char5");
 
-    // if (mediaQuery.matches) {
+    if (mediaQuery.matches) {
 
         gsap.fromTo(".macro__polosa-set2",{width:"0px"},{width:"162px",scrollTrigger: {trigger: ".section2", start: "top top",end:500*vh, scrub: true,},});
 
@@ -181,26 +247,26 @@ window.addEventListener("load", () => {
         gsap.fromTo(".b_t1,.b_t1-fake",{transform: "translate(-50%, -50%) scale(1)",opacity:1,filter: "blur(0px)"},{transform: "translate(-50%, -50%)  scale(1.5)",opacity:0,filter: "blur(7px)",scrollTrigger: {trigger: ".section2", start:200*vh,end:250*vh, scrub: true,},});
         gsap.fromTo(".b_t2",{transform: "translate(-50%, -50%) scale(1)",opacity:1,filter: "blur(0px)"},{transform: "translate(-50%, -50%)  scale(1.5)",opacity:0,filter: "blur(7px)",scrollTrigger: {trigger: ".section2", start:300*vh,end:350*vh, scrub: true,},});
         gsap.fromTo(".b_t3",{transform: "translate(-50%, -50%) scale(1)",opacity:1,filter: "blur(0px)"},{transform: "translate(-50%, -50%)  scale(1.5)",opacity:0,filter: "blur(7px)",scrollTrigger: {trigger: ".section2", start:400*vh,end:450*vh, scrub: true,},});
-    // }
-    // else{
+    }
+    else{
         
-    //     gsap.fromTo(".char5",{opacity: .1},{opacity: 1,duration: 1,stagger: 0.03,scrollTrigger: {trigger: ".section2", start: "top top",end:160*vh, scrub: true,},});
-    //     gsap.fromTo(".b_t11",{transform: "translate(-50%, -50%) ",opacity:.85},{transform: "translate(-50%, -50%) ",duration: .5,opacity:0,scrollTrigger: {trigger: ".section2", start:189*vh,end:180*vh,toggleActions: "play none none reverse"}});
+        gsap.fromTo(".char5",{opacity: .1},{opacity: 1,duration: 1,stagger: 0.03,scrollTrigger: {trigger: ".section2", start: "top top",end:160*vh, scrub: true,},});
+        gsap.fromTo(".b_t11",{transform: "translate(-50%, -50%) ",opacity:.85},{transform: "translate(-50%, -50%) ",duration: .5,opacity:0,scrollTrigger: {trigger: ".section2", start:189*vh,end:180*vh,toggleActions: "play none none reverse"}});
 
-    //     gsap.fromTo(".macro__polosa-set2",{width:"0px"},{width:"120px",scrollTrigger: {trigger: ".section2", start: "top top",end:500*vh, scrub: true,},});
+        gsap.fromTo(".macro__polosa-set2",{width:"0px"},{width:"120px",scrollTrigger: {trigger: ".section2", start: "top top",end:500*vh, scrub: true,},});
 
-    //     gsap.fromTo(".char",{opacity: .4},{opacity: 1,duration: 1,stagger: 0.03,scrollTrigger: {trigger: ".section2", start: "top top",end:200*vh, scrub: true,},});
-    //     gsap.fromTo(".char2",{opacity: 1},{opacity: 1,duration: 1,stagger: 0.001,duration:.01});
+        gsap.fromTo(".char",{opacity: .4},{opacity: 1,duration: 1,stagger: 0.03,scrollTrigger: {trigger: ".section2", start: "top top",end:200*vh, scrub: true,},});
+        gsap.fromTo(".char2",{opacity: 1},{opacity: 1,duration: 1,stagger: 0.001,duration:.01});
 
         
-    //     gsap.fromTo(".b_t1,.b_t1-fake",{transform: "translate(-50%, -50%) ",opacity:1},{transform: "translate(-50%, -50%) ",duration: .35,opacity:0,scrollTrigger: {trigger: ".section2", start:180*vh,end:181*vh,toggleActions: "play none none reverse"}});
-    //     gsap.fromTo(".b_t1,.b_t1-fake",{transform: "translate(-50%, -50%) ",opacity:0},{transform: "translate(-50%, -50%) ",duration: .35,opacity:1,scrollTrigger: {trigger: ".section2", start:100*vh,end:101*vh,toggleActions: "play none none reverse"}});
-    //     gsap.fromTo(".b_t2",{transform: "translate(-50%, -50%) ",opacity:1},{transform: "translate(-50%, -50%) ",duration: .35,opacity:0,scrollTrigger: {trigger: ".section2", start:280*vh,end:281*vh,toggleActions: "play none none reverse"}});
-    //     gsap.fromTo(".b_t2",{transform: "translate(-50%, -50%) ",opacity:0},{transform: "translate(-50%, -50%) ",duration: .35,opacity:1,scrollTrigger: {trigger: ".section2", start:201*vh,end:202*vh,toggleActions: "play none none reverse"}});
-    //     gsap.fromTo(".b_t3",{transform: "translate(-50%, -50%) ",opacity:1},{transform: "translate(-50%, -50%) ",duration: .35,opacity:0,scrollTrigger: {trigger: ".section2", start:379*vh,end:380*vh,toggleActions: "play none none reverse"}});
-    //     gsap.fromTo(".b_t3",{transform: "translate(-50%, -50%) ",opacity:0},{transform: "translate(-50%, -50%) ",duration: .35,opacity:1,scrollTrigger: {trigger: ".section2", start:301*vh,end:302*vh,toggleActions: "play none none reverse"}});
-    //     // gsap.fromTo(".b_t4",{transform: "translate(-50%, -50%) ",opacity:1},{transform: "translate(-50%, -50%) ",duration: .35,opacity:0,scrollTrigger: {trigger: ".section2", start:499*vh,end:500*vh,toggleActions: "play none none reverse"}});
-    //     gsap.fromTo(".b_t4",{transform: "translate(-50%, -50%) ",opacity:0},{transform: "translate(-50%, -50%) ",duration: .35,opacity:1,scrollTrigger: {trigger: ".section2", start:401*vh,end:402*vh,toggleActions: "play none none reverse"}});
+        gsap.fromTo(".b_t1,.b_t1-fake",{transform: "translate(-50%, -50%) ",opacity:1},{transform: "translate(-50%, -50%) ",duration: .35,opacity:0,scrollTrigger: {trigger: ".section2", start:180*vh,end:181*vh,toggleActions: "play none none reverse"}});
+        gsap.fromTo(".b_t1,.b_t1-fake",{transform: "translate(-50%, -50%) ",opacity:0},{transform: "translate(-50%, -50%) ",duration: .35,opacity:1,scrollTrigger: {trigger: ".section2", start:100*vh,end:101*vh,toggleActions: "play none none reverse"}});
+        gsap.fromTo(".b_t2",{transform: "translate(-50%, -50%) ",opacity:1},{transform: "translate(-50%, -50%) ",duration: .35,opacity:0,scrollTrigger: {trigger: ".section2", start:280*vh,end:281*vh,toggleActions: "play none none reverse"}});
+        gsap.fromTo(".b_t2",{transform: "translate(-50%, -50%) ",opacity:0},{transform: "translate(-50%, -50%) ",duration: .35,opacity:1,scrollTrigger: {trigger: ".section2", start:201*vh,end:202*vh,toggleActions: "play none none reverse"}});
+        gsap.fromTo(".b_t3",{transform: "translate(-50%, -50%) ",opacity:1},{transform: "translate(-50%, -50%) ",duration: .35,opacity:0,scrollTrigger: {trigger: ".section2", start:379*vh,end:380*vh,toggleActions: "play none none reverse"}});
+        gsap.fromTo(".b_t3",{transform: "translate(-50%, -50%) ",opacity:0},{transform: "translate(-50%, -50%) ",duration: .35,opacity:1,scrollTrigger: {trigger: ".section2", start:301*vh,end:302*vh,toggleActions: "play none none reverse"}});
+        // gsap.fromTo(".b_t4",{transform: "translate(-50%, -50%) ",opacity:1},{transform: "translate(-50%, -50%) ",duration: .35,opacity:0,scrollTrigger: {trigger: ".section2", start:499*vh,end:500*vh,toggleActions: "play none none reverse"}});
+        gsap.fromTo(".b_t4",{transform: "translate(-50%, -50%) ",opacity:0},{transform: "translate(-50%, -50%) ",duration: .35,opacity:1,scrollTrigger: {trigger: ".section2", start:401*vh,end:402*vh,toggleActions: "play none none reverse"}});
         
-    // }
+    }
 

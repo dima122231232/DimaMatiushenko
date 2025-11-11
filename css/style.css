@@ -62,7 +62,7 @@ header{
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    margin-right: 2.5vw;
+    margin-right: 20px;
     position: relative;
     pointer-events: auto;
     opacity: 0;
@@ -563,6 +563,7 @@ header{
 }
 .comments__items-img {
    width: 100%;
+   opacity: 0;
 }
 .name__comments {
     font-size: calc(var(--index)*.75);
@@ -717,8 +718,8 @@ header{
     position: absolute;
     width: calc(var(--index)*19.5);
     left:50%;
-    top:50%;
-    transform: translate(-50%,-50%);
+    top:45%;
+    transform: translate(-50%, -50%);
     
 }
 .sek4__img2-block{
@@ -759,7 +760,8 @@ header{
 
           /*FOOTER*/
 footer{
-    height: 75vh;
+    padding-top: 5vh;
+    height: 45vh;
     background-color: #000;
     color: #fff;
     display: flex;

@@ -155,7 +155,8 @@
         margin: calc(var(--index)*-2.5) 0 0 calc(var(--index)* .3);
     }
     footer{
-        height:50vh;
+        height:40vh;
+        padding-top: 0px;
     }
     .fake{
         display: none;
